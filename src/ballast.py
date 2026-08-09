@@ -18,14 +18,16 @@ G                 = 9.81     # m/s²
 
 # ---------------------------------------------------------------------------
 # Core ballast math
+#GOAL : GET GLIDER DENSITY = OCEAN DENSITY
 # ---------------------------------------------------------------------------
 def neutral_buoyancy_mass(rho_water, glider_volume=GLIDER_VOLUME):
     """
-    Mass the glider needs to be to achieve neutral buoyancy
-    in water of density rho_water.
+    Mass the glider needs to achieve neutral buoyancy
+    in water of density rho_water
 
     Neutral buoyancy: glider_mass = rho_water * glider_volume
-
+    
+    Density of glider = density of tank
     Args:
         rho_water      : water density at target depth (kg/m³)
         glider_volume  : glider displaced volume (m³)
