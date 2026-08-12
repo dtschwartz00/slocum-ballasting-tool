@@ -22,13 +22,20 @@ from ballast import (
 # Page config
 # ---------------------------------------------------------------------------
 st.set_page_config(
-    page_title="Slocum G2 Ballasting Tool",
-    page_icon="🌊",
+    page_title="Slocum Glider G2 Ballasting Tool",
     layout="wide",
 )
 
-st.title("🌊 Slocum G2 Ballasting Tool")
-st.caption("Step-by-step guided ballasting workflow for Slocum G2 gliders.")
+st.markdown("""
+<style>
+html, body, [class*="css"]  {
+    font-family: 'Inter', sans-serif;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+st.title("Slocum G2 Ballasting Tool")
+st.caption("Step-by-step guided ballasting workflow for Slocum G2 gliders. This tool was created using the RUTGERS University RUCOOL Ballasting SOP")
 
 # ---------------------------------------------------------------------------
 # Step tabs
@@ -76,7 +83,6 @@ with steps[0]:
     sigma_g = 0.001 * glider_volume_mL
     pump_range_mL = PUMP_RANGE * 1e6 / 2    # half pump range in mL
     sigma_count = pump_range_mL / sigma_g
-    ##st.info("Sanity Check")
     if 55.0 <= glider_volume_L <= 60.0:
         st.success(f"SUCCESS! Volume {glider_volume_L:.1f}L is within expected G2 range (55-60L)")
     else:
