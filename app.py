@@ -18,9 +18,9 @@ from ballast import (
     PUMP_RANGE,
 )
 
-# ---------------------------------------------------------------------------
-# Page set up
-# ---------------------------------------------------------------------------
+
+# Page set up ##############################################
+
 st.set_page_config(
     page_title="Slocum Glider G2 Ballasting Tool",
     layout="wide",
@@ -50,9 +50,7 @@ div[role="radiogroup"] label:hover {
 st.title("Slocum G2 Ballasting Tool")
 st.caption("Step-by-step guided ballasting workflow for Slocum G2 gliders. This tool was created using the RUTGERS University RUCOOL Ballasting SOP")
 
-# ---------------------------------------------------------------------------
-# Step tabs
-# ---------------------------------------------------------------------------
+#sidebar tabs #########################################
 st.sidebar.title("Navigation")
 st.sidebar.caption("Complete steps in order")
 
@@ -64,12 +62,14 @@ steps = st.sidebar.radio("Steps",[
     "5. H-Moment",
     ])
 
-# ===========================================================================
+#################################################################
 # STEP 1 — Volume
-# ===========================================================================
+#################################################################
 if steps == "1. Volume":
-    st.header("Step 1 — Glider Volume & Mass")
-    st.markdown("Enter the volume and the weighed glider mass. These values feed into every subsequent calculation.")
+    st.header("Step 1 — Check Those Specs: Glider Volume & Mass")
+    st.markdown(" Enter the volume and the weighed glider mass. These values feed into every subsequent calculation.")
+    st.info(f"Remember: Density = Mass / Volume. This step will help answer how much mass equals one unit of density change")
+    
 
     col1, col2 = st.columns(2)
     with col1:
@@ -104,7 +104,7 @@ if steps == "1. Volume":
         st.warning(f"WARNING! Volume {glider_volume_L:.1f}L is outside typical G2 range (55-60L)")
 
     col1, col2, col3 = st.columns(3)
-    col1.metric("Glider volume", f"{glider_volume_mL:.0f} mL")
+    col1.metric("Glider volume in mL", f"{glider_volume_mL:.0f} mL")
     col2.metric("1 sigma", f"{sigma_g:.1f} g", help="Mass needed to shift density by 0.001 g/mL")
     col3.metric("Pump authority", f"±{sigma_count:.1f} sigma", help="How many sigma the pump can correct")
 
@@ -235,8 +235,8 @@ elif steps == "2. Density & Ballast":
 # ===========================================================================
 elif steps == "3. Trim / Balance":
     st.header("Step 3 — Trim / Balance")
-    st.markdown("With the glider suspended in the tank, record the fore and aft scale readings. ")
-    st.info("Place scales equal distant from glider's center of gravity which is approx. the middle of the science bay")
+    st.markdown("With the glider suspended in the tank, record the fore and aft scale readings")
+    st.info("Place scales equal distant from glider's center of gravity which is approximately the middle of the science bay")
 
     col1, col2, col3 = st.columns(3)
     with col1:
