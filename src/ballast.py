@@ -7,19 +7,16 @@ import numpy as np
 from density import density_from_ctd
 
 
-# ---------------------------------------------------------------------------
+
 # Slocum G2 default parameters — update these to match your specific glider
-# ---------------------------------------------------------------------------
 GLIDER_MASS       = 52.000   # kg  — total glider mass (weigh it)
 GLIDER_VOLUME     = 0.05080  # m³  — hull displaced volume at neutral
 PUMP_RANGE        = 0.000260 # m³  — total pump volume (±130 mL each side)
 G                 = 9.81     # m/s²
 
 
-# ---------------------------------------------------------------------------
 # Core ballast math
 #GOAL : GET GLIDER DENSITY = OCEAN DENSITY
-# ---------------------------------------------------------------------------
 def neutral_buoyancy_mass(rho_water, glider_volume=GLIDER_VOLUME):
     """
     Mass the glider needs to achieve neutral buoyancy
@@ -81,15 +78,13 @@ def pump_fraction_needed(glider_mass, rho_water,
     return fraction
 
 
-# ---------------------------------------------------------------------------
-# Profile analysis
-# ---------------------------------------------------------------------------
+# analyze a CTD profile
 def analyze_profile(depth, rho,
                     glider_mass=GLIDER_MASS,
                     glider_volume=GLIDER_VOLUME,
                     pump_range=PUMP_RANGE):
     """
-    Analyze the glider's buoyancy state through an entire CTD profile.
+    Analyze the glider's buoyancy state through an entire CTD profile
 
     For each depth, computes:
     - Net buoyancy force
@@ -113,7 +108,7 @@ def analyze_profile(depth, rho,
     # enough upward buoyancy force to overcome gravity at every depth
     can_surface   = fractions <= 1.0
     can_dive      = fractions >= -1.0
-    pump_headroom = 1.0 - fractions    # how much pump authority is left for surfacing
+    pump_headroom = 1.0 - fractions    # how much pump room is left for surfacing
 
     # Find the deepest depth from which the glider can still surface
     surface_risk_depths = depth[~can_surface]

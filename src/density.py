@@ -46,7 +46,7 @@ def plot_density_profile(depth, rho, title="Density profile"):
 
 
 if __name__ == "__main__":
-    # Synthetic test profile — a simple thermocline
+    # fake test profile — a simple thermocline
     depth       = np.linspace(0, 200, 100)
     temperature = 20 - 10 * (1 - np.exp(-depth / 50))   # warm surface, cold deep
     salinity    = 33 + 1.5 * (1 - np.exp(-depth / 80))  # fresher surface, saltier deep
