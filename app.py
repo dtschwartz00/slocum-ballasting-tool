@@ -41,20 +41,32 @@ st.caption("Step-by-step guided ballasting workflow for Slocum G2 gliders. This 
 # Step tabs
 # ---------------------------------------------------------------------------
 st.sidebar.title("Navigation")
-st.sidebar.caption("Complete steps in order for best results")
-steps = st.sidebar.radio("Steps",[
-    "① Volume",
-    "② Density & Ballast",
-    "③ Trim / Balance",
-    "④ Roll",
-    "⑤ H-Moment",
-])
+st.sidebar.caption("Complete steps in order")
+
+if 'step' not in st.session_state:
+    st.session_state['step'] = "1. Volume"
+def nav_button(label,color):
+    is_active = st.session_state['step'] == label
+    if st.sidebar.button(
+        label,
+        use_container_width=True,
+        type="primary" if is_active else "secondary",
+    ):
+        st.session_state['step'] = label
+
+nav_button("1. Volume", "#00b4d8")
+nav_button("2. Density & Ballast", "#06d6a0")
+nav_button("3. Trim / Balance", "#f77f00")
+nav_button("4. Roll", "#e63946")
+nav_button("5. H-Moment", "#9b5de5")
+
+steps = st.session_state['step']
 
 
 # ===========================================================================
 # STEP 1 — Volume
 # ===========================================================================
-if steps == "① Volume":
+if steps == "1. Volume":
     st.header("Step 1 — Glider Volume & Mass")
     st.markdown("Enter the volume and the weighed glider mass. These values feed into every subsequent calculation.")
 
@@ -102,7 +114,7 @@ if steps == "① Volume":
 # ===========================================================================
 # STEP 2 — Density & Ballast
 # ===========================================================================
-elif steps == "② Density & Ballast":
+elif steps == "2. Density & Ballast":
     st.header("Step 2 — Density & Ballast Recommendation")
 
     glider_volume = st.session_state.get('glider_volume', GLIDER_VOLUME)
@@ -220,7 +232,7 @@ elif steps == "② Density & Ballast":
 # ===========================================================================
 # STEP 3 — Trim / Balance
 # ===========================================================================
-elif steps == "③ Trim / Balance":
+elif steps == "3. Trim / Balance":
     st.header("Step 3 — Trim / Balance")
     st.markdown("With the glider suspended in the tank, record the fore and aft scale readings. ")
     st.info("Place scales equal distant from glider's center of gravity which is approx. the middle of the science bay")
@@ -279,7 +291,7 @@ elif steps == "③ Trim / Balance":
 # ===========================================================================
 # STEP 4 — Roll
 # ===========================================================================
-elif steps == "④ Roll":
+elif steps == "4. Roll":
     st.header("Step 4 — Roll")
     st.info("Get the glider to just negatively buoyant before reading roll — "
         "use the ballast pump to obtain ±~200g. Read roll while glider is hovering, barely submerged.")
@@ -338,7 +350,7 @@ elif steps == "④ Roll":
 # ===========================================================================
 # STEP 5 — H-Moment
 # ===========================================================================
-elif steps == "⑤ H-Moment":
+elif steps == "5. H-Moment":
     st.header("Step 5 — H-Moment (Stability)")
     st.markdown(
         "The H-moment is the vertical distance between the glider's center of buoyancy and "
