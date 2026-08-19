@@ -31,6 +31,19 @@ st.markdown("""
 html, body, [class*="css"]  {
     font-family: 'Inter', sans-serif;
     }
+div[role="radiogroup"] label {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 16px;
+    margin: 4px 0;
+    border-radius: 8px;
+    border: 1px solid #2a3f5f;
+    display: block;
+}
+div[role="radiogroup"] label:hover {
+    border-color: #00b4d8;
+    color: #00b4d8;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -43,25 +56,13 @@ st.caption("Step-by-step guided ballasting workflow for Slocum G2 gliders. This 
 st.sidebar.title("Navigation")
 st.sidebar.caption("Complete steps in order")
 
-if 'step' not in st.session_state:
-    st.session_state['step'] = "1. Volume"
-def nav_button(label,color):
-    is_active = st.session_state['step'] == label
-    if st.sidebar.button(
-        label,
-        use_container_width=True,
-        type="primary" if is_active else "secondary",
-    ):
-        st.session_state['step'] = label
-
-nav_button("1. Volume", "#00b4d8")
-nav_button("2. Density & Ballast", "#06d6a0")
-nav_button("3. Trim / Balance", "#f77f00")
-nav_button("4. Roll", "#e63946")
-nav_button("5. H-Moment", "#9b5de5")
-
-steps = st.session_state['step']
-
+steps = st.sidebar.radio("Steps",[
+    "1. Volume", 
+    "2. Density & Ballast", 
+    "3. Trim / Balance", 
+    "4. Roll", 
+    "5. H-Moment",
+    ])
 
 # ===========================================================================
 # STEP 1 — Volume
