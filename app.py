@@ -31,6 +31,25 @@ st.markdown("""
 html, body, [class*="css"]  {
     font-family: 'Inter', sans-serif;
     }
+
+/* Tab styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 12px;
+}
+.stTabs [data-baseweb="tab"] {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 16px 20px;
+    border-radius: 6px;
+    border: 1.5px solid #00b4d8;
+    color: #00b4d8;
+    background-color: transparent;
+}
+.stTabs [aria-selected="true"] {
+    background-color: #00b4d8;
+    color: #0f1923;
+    font-weight: 700;
+}
 </style>
 """, unsafe_allow_html=True)
 
