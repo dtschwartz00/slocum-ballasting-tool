@@ -1,5 +1,7 @@
 # slocum-ballasting-tool
 
+**Live app:** [newpilot.streamlit.app](https://newpilot.streamlit.app)
+
 Interactive Ballasting Optimizer for Slocum G2 gliders with CTD profile support
 
 Learning to ballast a Slocum Glider as a new pilot is a daunting task. The difference between a correctly ballasted glider and one that cannot resurface could mean the loss of a $300k instrument. RUCOOL at Rutgers University has played a pivotal role in the glider community by creating resources and leading workshops for prospective glider pilots. One such resource is their ballasting spreadsheet — a great tool for experienced pilots, but one that doesn't explain the reasoning behind each step. Using resources from the Glider Microcredential workshop, I built this tool so new pilots can see the "why" behind the numbers. 

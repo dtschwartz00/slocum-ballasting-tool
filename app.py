@@ -19,7 +19,7 @@ from ballast import (
 )
 
 # ---------------------------------------------------------------------------
-# Page config
+# Page set up
 # ---------------------------------------------------------------------------
 st.set_page_config(
     page_title="Slocum Glider G2 Ballasting Tool",
@@ -31,25 +31,6 @@ st.markdown("""
 html, body, [class*="css"]  {
     font-family: 'Inter', sans-serif;
     }
-
-/* Tab styling */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 12px;
-}
-.stTabs [data-baseweb="tab"] {
-    font-size: 16px;
-    font-weight: 500;
-    padding: 16px 20px;
-    border-radius: 6px;
-    border: 1.5px solid #00b4d8;
-    color: #00b4d8;
-    background-color: transparent;
-}
-.stTabs [aria-selected="true"] {
-    background-color: #00b4d8;
-    color: #0f1923;
-    font-weight: 700;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -59,7 +40,9 @@ st.caption("Step-by-step guided ballasting workflow for Slocum G2 gliders. This 
 # ---------------------------------------------------------------------------
 # Step tabs
 # ---------------------------------------------------------------------------
-steps = st.tabs([
+st.sidebar.title("Navigation")
+st.sidebar.caption("Complete steps in order for best results")
+steps = st.sidebar.radio("Steps",[
     "① Volume",
     "② Density & Ballast",
     "③ Trim / Balance",
@@ -71,7 +54,7 @@ steps = st.tabs([
 # ===========================================================================
 # STEP 1 — Volume
 # ===========================================================================
-with steps[0]:
+if steps == "① Volume":
     st.header("Step 1 — Glider Volume & Mass")
     st.markdown("Enter the volume and the weighed glider mass. These values feed into every subsequent calculation.")
 
@@ -119,7 +102,7 @@ with steps[0]:
 # ===========================================================================
 # STEP 2 — Density & Ballast
 # ===========================================================================
-with steps[1]:
+elif steps == "② Density & Ballast":
     st.header("Step 2 — Density & Ballast Recommendation")
 
     glider_volume = st.session_state.get('glider_volume', GLIDER_VOLUME)
@@ -237,7 +220,7 @@ with steps[1]:
 # ===========================================================================
 # STEP 3 — Trim / Balance
 # ===========================================================================
-with steps[2]:
+elif steps == "③ Trim / Balance":
     st.header("Step 3 — Trim / Balance")
     st.markdown("With the glider suspended in the tank, record the fore and aft scale readings. ")
     st.info("Place scales equal distant from glider's center of gravity which is approx. the middle of the science bay")
@@ -296,7 +279,7 @@ with steps[2]:
 # ===========================================================================
 # STEP 4 — Roll
 # ===========================================================================
-with steps[3]:
+elif steps == "④ Roll":
     st.header("Step 4 — Roll")
     st.info("Get the glider to just negatively buoyant before reading roll — "
         "use the ballast pump to obtain ±~200g. Read roll while glider is hovering, barely submerged.")
@@ -355,7 +338,7 @@ with steps[3]:
 # ===========================================================================
 # STEP 5 — H-Moment
 # ===========================================================================
-with steps[4]:
+elif steps == "⑤ H-Moment":
     st.header("Step 5 — H-Moment (Stability)")
     st.markdown(
         "The H-moment is the vertical distance between the glider's center of buoyancy and "
